@@ -1,45 +1,48 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from "../UserContext"
 import { Link } from "react-router-dom"
+import { client } from "../assets/utilities.js"
 
 const Header = () => {
 	const { setUserData, userData } = useContext(UserContext)
+	const [name, setName] = useState("")
+
 	useEffect(() => {
-		fetch("http://localhost:5000/users/profile", {
-			credentials: "include",
-		})
-		.then(response => {
-			response.json().then((data, err) => {
-				setUserData(data);
-				console.log(data);
-				console.log({userData});
-			})
-		})
+		const getUserProfile = async () => {
+			try {
+				const response = await client.get("/users/profile", {
+					withCredentials: true
+				})
+				setUserData(response?.data);
+			} catch (error) {
+				console.error(error?.stack);
+			}
+		}
+		getUserProfile()
 	}, [])
 
 	const logout = () => {
-		fetch("http://localhost:5000/users/logout", {
-			method: "POST",
-			credentials: "include"
+		client.post("/users/logout", {
+			withCredentials: true
 		})
 		setUserData(null)
 	}
 
 	const username = userData?.data?.username
 	return (
-		<header className="flex px-5 lg:px-20 bg-white justify-between py-4 h-[65px] items-center w-full sticky top-0">
-			<Link to="/" className="text-3xl font-bold text-black cursor-pointer hover:text-emerald-400 transition delay-200">MyBlog.</Link>
-			<nav className="flex items-center justify-between text-gray-800 text-sm space-x-4">
+		<header className="header">
+			<Link to="/" className="header_logo">MyBlog.</Link>
+			<nav className="header_username">
 			{ username && (
 				<>
-					<Link to="/create" className="cursor-pointer hover:text-emerald-400 transition delay-200">Create</Link>
-					<p onClick={logout} className="cursor-pointer hover:text-emerald-400 transition delay-200">Logout</p>
+					<Link to="/create" className="header_links">Create</Link>
+					<p onClick={logout} className="header_links">Logout</p>
 				</>
 				)}
 			{!username && (
 				<>
-					<Link to="/register" className="cursor-pointer hover:text-emerald-400 transition delay-200">Register</Link>
-					<Link to="/login" className="cursor-pointer hover:text-emerald-400 transition delay-200">Login</Link>
+					<Link to="/register" className="header_links">Register</Link>
+					<Link to="/login" className="header_links">Login</Link>
 				</>
 				)}
 			</nav>

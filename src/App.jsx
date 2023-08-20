@@ -14,6 +14,7 @@ import { Route, Routes } from "react-router-dom"
 import { UserContextProvider } from "././UserContext.jsx"
 import PostPage from "./Pages/PostPage.jsx"
 import EditPost from "./Pages/EditPost.jsx"
+import Categories from "./Pages/Categories.jsx"
 
 function App() {
   return ( 
@@ -26,6 +27,7 @@ function App() {
                 <Route path={'/create'} element={<CreatePost />} />
                 <Route path={'/post/:id'} element={<PostPage />} />
                 <Route path={'/edit/:id'} element={<EditPost />} />
+                <Route path={'/categories/:id'} element={<Categories />} />
                 <Route path="*" element={<Page404 />} />
             </Route>
         </Routes>
