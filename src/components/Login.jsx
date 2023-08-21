@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link, Navigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
+import { client } from "../assets/utilities"
 
 const Login = () => {
 	const [password, setPassword] = useState('')
@@ -11,12 +12,17 @@ const Login = () => {
 	const login = async (event) => {
 		event.preventDefault()
 		// try {
-			const response = await fetch("https://my-blog-backend-t19h.onrender.com/users/login", {
-			method: "POST",
-			body: JSON.stringify({ password, email }),
-			headers: { 'Content-Type': 'application/json' },
-			credentials: "include",
-		})
+		// 	const response = await fetch("https://my-blog-backend-t19h.onrender.com/users/login", {
+		// 	method: "POST",
+		// 	body: JSON.stringify({ password, email }),
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	credentials: "include",
+		// })
+
+			const response = await client.post("https://my-blog-backend-t19h.onrender.com/users/login", {
+				withCredentials: true,
+				body: { password, email }
+			})
 		
 		if (response.ok) {
 			response.json().then(data => {
