@@ -11,7 +11,8 @@ const Register = () => {
 		const res = await fetch("https://my-blog-backend-t19h.onrender.com/users/register", {
 			method: "POST",
 			body: JSON.stringify({ username, password, email }),
-			headers: { "Content-Type": "application/json" }
+			headers: { "Content-Type": "application/json" },
+			credentials: "include",
 		})
 		if (res.status === 200) {
 			console.log("Registration successful")
