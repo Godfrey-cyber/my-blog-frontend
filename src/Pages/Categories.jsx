@@ -29,7 +29,7 @@ const Categories = () => {
 		}, [id])
 
 		useEffect(() => {
-			fetch(`https://my-blog-backend-t19h.onrender.com/getByCategory/${id}`).then(res => {
+			fetch(`https://my-blog-backend-t19h.onrender.com/categories/getByCategory/${id}`).then(res => {
 				res.json().then(data => {
 					setPosts(data.data)
 					console.log(data.data)
