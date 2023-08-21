@@ -22,7 +22,7 @@ const Categories = () => {
 		// 	}
 		// }
 		useEffect(() => {
-			fetch(`http://localhost:5000/categories/getCategory/${id}`).then(response => {
+			fetch(`https://my-blog-backend-t19h.onrender.com/categories/getCategory/${id}`).then(response => {
 				response.json().then(cat => setCategory(cat.data))
 			}).catch(err => console.log(err))
 			console.log(category)
