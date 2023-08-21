@@ -1,24 +1,29 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 const Register = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
+	const [redirect, setRedirect] = useState(false)
 	//register user
 	const register = async(event) => {
 		event.preventDefault()
 		const res = await fetch("https://my-blog-backend-t19h.onrender.com/users/register", {
 			method: "POST",
 			body: JSON.stringify({ username, password, email }),
-			// headers: { "Content-Type": "application/json" },
 			headers: { 'Content-Type': 'application/json' },
 		})
 		if (res.status === 200) {
 			console.log("Registration successful")
+			console.log(res)
+			setRedirect(true)
 		} else {
 			console.log("Sorry something went wrong! Try again later please...")
 		}
+	}
+	if (redirect) {
+		return <Navigate to={'/'} />
 	}
 	return (
 		<section className="min-h-[calc(100vh - 60px)] w-full px-5 md:px-10 lg:px-20">
