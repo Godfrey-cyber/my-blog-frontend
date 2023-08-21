@@ -49,42 +49,39 @@ const CreatePost = () => {
 		userData.set("catName", catName)
 		// userData.set("category", category)
 		userData.set("photo", photo[0])
+		// try {
+		// 	const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
+		// 		method: "POST",
+		// 		body: userData,
+		// 		credentials: "include",
+		// 	})
+		// 	if (response.ok) {
+		// 		setRedirect(true)
+		// 	}
+		// } catch (error) {
+		// 	if (error || response.status === "400") {
+		// 		return console.log("Something went wrong")
+		// 	} else {
+		// 		console.log(error)
+		// 	}
+		// }
+
 		try {
-			const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
-			method: "POST",
-			body: userData,
-			credentials: "include",
-		})
-			console.log(await response.json())
-			console.log(response.ok)
+			const response = await client.post("/posts/createpost", {
+				body: userData,
+				withCredentials: true
+			})
 			if (response.ok) {
 				setRedirect(true)
 			}
-		} catch (error) {
+		}catch (error) {
 			if (error || response.status === "400") {
-				// return res.status(400).json("Something went wrong")
 				return console.log("Something went wrong")
 			} else {
-				console.log(error)
+				console.error(error?.stack);
 			}
-		}
+		} 
 
-		console.log(userData)
-		
-		// try {
-		// 	const response = await client.post("/posts/createpost", {
-		// 		body: userData, 
-		// 	    headers: { "Content-Type": "application/json" },
-		// 	    withCredentials: true,
-		// 	})
-			
-		// } catch(error) {
-			// if (response.status === 400) {
-		 //        console.log("Bad request! Something went wrong please try again later");
-		 //    } else {
-		        // console.log(error)
-		    // }	
-		// }
 	}
 	if (redirect) {
 		return <Navigate to={'/'}/>
@@ -93,15 +90,14 @@ const CreatePost = () => {
 		<section className="create_section min-h-[calc(100vh - 60px)]">
 			<form action="" onSubmit={createPost} className="create_form">
 				<h4 className="text-gray-600 font-bold items-center my-4">Creating a Post</h4>
-					<select onChange={handleChange} className="create_input" name="catId" placeholder="Add a category" id="">
-						{category?.length > 0 && category.map(cat => (
-							<option className="text-sm text-gray-700 font-light" key={cat._id} value={cat._id}>{cat.name}</option>
-						))}
-					</select>
+				<select onChange={handleChange} className="create_input" name="catId" placeholder="Add a category" id="">
+					{category?.length > 0 && category.map(cat => (
+						<option className="text-sm text-gray-700 font-light" key={cat._id} value={cat._id}>{cat.name}</option>
+					))}
+				</select>
 				<input type="title" value={title} onChange={event => setTitle(event.target.value)} id="title" placeholder="Enter your title" className="create_input" />
 				<input type="summary" value={summary} onChange={event => setSummary(event.target.value)} id="summary" placeholder="Enter your summary" className="create_input" />
 				<input type="file" onChange={event => setPhoto(event.target.files)} id="photo" placeholder="Enter your photo" className="create_input" />
-				{/*<textarea className="mx-auto outline-none border-2 border-gray-300 w-full bg-gray-100 px-3 py-2 rounded-md text-sm text-gray-700" name="" id="" cols="30" placeholder="Write your post here.." rows="10"></textarea>*/}
 				<ReactQuill value={content} onChange={newValue => setContent(newValue)} modules={modules} formats={formats} className="w-full" />
 				<button type="submit" className="create_button">Create</button>
 			</form>
