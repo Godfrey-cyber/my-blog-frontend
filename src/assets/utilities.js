@@ -18,7 +18,7 @@ export const formats = [
   ]
 
 export const client = axios.create({
-	baseURL: "http://localhost:5000",
+	baseURL: "https://my-blog-backend-t19h.onrender.com",
 	// withCredentials: true
 });
 
