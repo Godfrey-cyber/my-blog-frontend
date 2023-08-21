@@ -50,7 +50,7 @@ const CreatePost = () => {
 		// userData.set("category", category)
 		userData.set("photo", photo[0])
 		try {
-			const response = await fetch("http://localhost:5000/posts/createpost", {
+			const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
 			method: "POST",
 			body: userData,
 			credentials: "include",

@@ -42,7 +42,7 @@ const PostPage = () => {
 				</div>
 				<div className="w-full flex flex-col space-y-2 group">
 					<div className="flex justify-between items-center text-sm my-1 font-normal text-gray-700">
-						<span className="flex-col md:justify-between space-y-.5 md:flex-row my-3">
+						<span className="flex-col md:justify-between space-y-.5 flex md:flex-row my-3">
 							<p className="postpage_p">{author?.username}</p>
 							<time className="text-xs text-gray-700">Posted on {createdAt && format(new Date(createdAt), 'MMM d, yyyy, HH:mm')}</time>
 							<p className="postpage_p">@{author?.username.split(" ")}</p>
