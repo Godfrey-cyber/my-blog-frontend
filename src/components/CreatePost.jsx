@@ -62,7 +62,8 @@ const CreatePost = () => {
 			}
 		} catch (error) {
 			if (error || response.status === "400") {
-				return res.status(400).json("Something went wrong")
+				// return res.status(400).json("Something went wrong")
+				return console.log("Something went wrong")
 			} else {
 				console.log(error)
 			}
