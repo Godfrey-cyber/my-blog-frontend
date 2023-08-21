@@ -11,7 +11,7 @@ const Post = ({ _id, title, photo, summary, content, createdAt, author, catName 
 			</div>
 			<div className="post_img_div">
 				<Link to={`/post/${_id}`}>
-					<img className="post_img" src={`http://localhost:5000/${photo}`} alt={`http://localhost:5000/${photo}`} />
+					<img className="post_img" src={`https://my-blog-backend-t19h.onrender.com/${photo}`} alt={`http://localhost:5000/${photo}`} />
 				</Link>
 			</div>
 		{/*title*/}

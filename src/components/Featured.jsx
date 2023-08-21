@@ -23,7 +23,7 @@ const Featured = () => {
 							<p className="text-xs text-gray-500 hover:text-green-400 transition delay-300 cursor-pointer">{post.author.username}</p>
 						</span>
 						<div className="w-full h-[300px]">
-							<img className="w-full h-full object-cover" src={`http://localhost:5000/${post.photo}`} alt={post.photo} />
+							<img className="w-full h-full object-cover" src={`https://my-blog-backend-t19h.onrender.com/${post.photo}`} alt={post.photo} />
 						</div>
 					</div>
 				))}

@@ -36,7 +36,7 @@ const PostPage = () => {
 								{/*</Link>*/}
 								{/*<Link to={`/post/${id}`}>*/}
 							</span>
-							<img className="object-cover w-full" src={`http://localhost:5000/${photo}`} alt="" />
+							<img className="object-cover w-full" src={`https://my-blog-backend-t19h.onrender.com/${photo}`} alt="" />
 						</div>
 					</Link>
 				</div>

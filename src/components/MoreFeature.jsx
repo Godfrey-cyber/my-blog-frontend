@@ -35,7 +35,7 @@ const MoreFeatured = () => {
 							<div className="post_img_div">
 								<p className="md:hidden text-xs font-medium text-green-600 my-2">{post.catName}</p>
 								<Link to={`/post/${post._id}`}>
-									<img className="post_img" src={`http://localhost:5000/${post.photo}`} alt="" />
+									<img className="post_img" src={`https://my-blog-backend-t19h.onrender.com/${post.photo}`} alt="" />
 								</Link>
 							</div>
 							{/*title*/}
