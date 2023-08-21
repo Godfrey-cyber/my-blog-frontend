@@ -8,7 +8,7 @@ const Register = () => {
 	//register user
 	const register = async(event) => {
 		event.preventDefault()
-		const res = await fetch("http://localhost:5000/users/register", {
+		const res = await fetch("https://my-blog-backend-t19h.onrender.com/users/register", {
 			method: "POST",
 			body: JSON.stringify({ username, password, email }),
 			headers: { "Content-Type": "application/json" }

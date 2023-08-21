@@ -15,7 +15,7 @@ const PostPage = () => {
 	const { setUserData, userData } = useContext(UserContext)
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/posts/${id}`).then(response => {
+		fetch(`https://my-blog-backend-t19h.onrender.com/posts/${id}`).then(response => {
 			response.json().then(post => setPostData(post))
 		})
 	}, [id])

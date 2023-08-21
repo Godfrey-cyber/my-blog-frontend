@@ -5,7 +5,7 @@ import { format } from "date-fns"
 const MoreFeatured = () => {
 	const [featuredPosts, setFeaturedPosts] = useState([])
 	useEffect(() => {
-		fetch("http://localhost:5000/posts/allposts").then(res => {
+		fetch("https://my-blog-backend-t19h.onrender.com/posts/allposts").then(res => {
 			res.json().then(data => {
 				setFeaturedPosts(data)
 				console.log(featuredPosts)
