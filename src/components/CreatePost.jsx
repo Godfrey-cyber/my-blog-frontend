@@ -34,7 +34,7 @@ const CreatePost = () => {
     const handleChange = (event) => {
     	if (event.target.name = "catId") {
     		setCatId(event.target.value)
-    	} 
+    	}
     	console.log(catId)
     }
 	//create post
