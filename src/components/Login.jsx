@@ -23,12 +23,20 @@ const Login = () => {
 		// 		body: { password, email }
 		// 	})
 		
-		if (response.ok) {
-			response.json().then(data => {
-				setUserData(data)
-				setRedirect(true)
-			})
+		// if (response.ok) {
+		// 	response.json().then(data => {
+		// 		setUserData(data)
+		// 		setRedirect(true)
+		// 		console.log("login successful")
+		// 	})
 			
+		// } else {
+		// 	console.log("Sorry something went wrong! Try again later please...")
+		// }
+		if (response.status === 200) {
+			console.log("Login successful")
+			console.log(response)
+			setRedirect(true)
 		} else {
 			console.log("Sorry something went wrong! Try again later please...")
 		}
