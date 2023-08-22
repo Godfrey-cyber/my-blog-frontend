@@ -65,22 +65,26 @@ const CreatePost = () => {
 		// 		console.log(error)
 		// 	}
 		// }
-
-		const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
-			method: "POST",
-			body: userData,
-			headers: { 'Content-Type': 'application/json' },
-			credentials: "include",
-		})
-		if (response.ok) {
-			setRedirect(true)
+		try {
+			const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
+				method: "POST",
+				body: userData,
+				headers: { 'Content-Type': 'application/json' },
+				credentials: "include",
+			})
+			if (response.ok) {
+				setRedirect(true)
+			}
+		} catch (error) {
+			if (error || response.status === "400") {
+				console.log("Something went wrong")
+			} else {
+				console.log(error.stack)
+			}
 		}
+		
 
-		if (error || response.status === "400") {
-			return console.log("Something went wrong")
-		} else {
-			console.log(error)
-		}
+		
 
 		// try {
 		// 	const response = await client.post("/posts/createpost", {
