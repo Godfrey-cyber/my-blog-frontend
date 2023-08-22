@@ -77,7 +77,7 @@ const CreatePost = () => {
 			}
 		} catch (error) {
 			if (error) {
-				console.log("Something went wrong")
+				console.log(error)
 			} 
 		}
 		
