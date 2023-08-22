@@ -76,11 +76,9 @@ const CreatePost = () => {
 				setRedirect(true)
 			}
 		} catch (error) {
-			if (error || response.status === "400") {
+			if (error) {
 				console.log("Something went wrong")
-			} else {
-				console.log(error.stack)
-			}
+			} 
 		}
 		
 
