@@ -19,7 +19,7 @@ const Header = () => {
 			}
 		}
 		getUserProfile()
-	}, [userData])
+	}, [])
 
 	const logout = () => {
 		client.post("/users/logout", {
