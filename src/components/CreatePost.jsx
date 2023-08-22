@@ -18,7 +18,7 @@ const CreatePost = () => {
 		const getCategories = async () => {
 			try {
 				const response = await client.get("/categories/getCategories")
-				setCategory(response.data.data)
+				setCategory(response?.data?.data)
 				// console.log(response)
 			} catch (error) {
 				// return res.status(401).json(error)
@@ -73,6 +73,7 @@ const CreatePost = () => {
 			})
 			if (response.ok) {
 				setRedirect(true)
+				console.log('successfully created')
 			}
 		}catch (error) {
 			if (error || response.status === "400") {
