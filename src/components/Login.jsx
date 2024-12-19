@@ -19,12 +19,13 @@ const Login = () => {
 		try {
 		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData, { withCredentials: true })
 			if (res.status === 200 || res.status === 201) {
-				setFormData({ email: "", password: "" });
+				setPassword("")
+				setEmail("")
 				navigate("/")
 	   			// toast.success("Successfully Logged in🥇")
 			}
 		} catch (error) {
-			console.log(err)
+			console.log(error)
 			setPassword("")
 		}
 	}
