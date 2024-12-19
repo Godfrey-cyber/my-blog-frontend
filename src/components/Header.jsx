@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from "../UserContext"
 import { Link } from "react-router-dom"
 import { client } from "../assets/utilities.js"
+import Sidebar from "./SideBar.jsx"
 import axios from 'axios'
 
 const Header = () => {
@@ -37,7 +38,10 @@ const Header = () => {
 	const username = userData?.data?.username
 	return (
 		<header className="header">
+		<span className="flex items-center space-x-1">
 			<Link to="/" className="header_logo">MyBlog.</Link>
+			<Sidebar />
+		</span>
 			<nav className="header_username">
 			{ username && (
 				<>
