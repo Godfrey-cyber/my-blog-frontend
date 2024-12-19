@@ -11,38 +11,22 @@ const Login = () => {
 	// login
 	const login = async (event) => {
 		event.preventDefault()
-			const response = await fetch("https://my-blog-backend-t19h.onrender.com/users/login", {
-				method: "POST",
-				body: JSON.stringify({ password, email }),
-				headers: { 'Content-Type': 'application/json' },
-				credentials: "include",
-			})
-
-		// 	const response = await client.post("https://my-blog-backend-t19h.onrender.com/users/login", {
-		// 		withCredentials: true,
-		// 		body: { password, email }
-		// 	})
-		
-		// if (response.ok) {
-		// 	response.json().then(data => {
-		// 		setUserData(data)
-		// 		setRedirect(true)
-		// 		console.log("login successful")
-		// 	})
-			
-		// } else {
-		// 	console.log("Sorry something went wrong! Try again later please...")
-		// }
-		if (response.status === 200) {
-			console.log("Login successful")
-			console.log(response)
-			setRedirect(true)
-		} else {
-			console.log("Sorry something went wrong! Try again later please...")
+		if (!email || !password) {
+			alert("All required fields must be filled.");
+	        return;
 		}
-	}
-	if (redirect) {
-		return <Navigate to={'/'} />
+
+		try {
+		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData, { withCredentials: true })
+			if (res.status === 200 || res.status === 201) {
+				setFormData({ email: "", password: "" });
+				navigate("/")
+	   			// toast.success("Successfully Logged in🥇")
+			}
+		} catch (error) {
+			console.log(err)
+			setPassword("")
+		}
 	}
 	return (
 		<section className="min-h-[calc(100vh - 60px)] w-full px-5 md:px-10 lg:px-20">
