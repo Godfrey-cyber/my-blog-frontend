@@ -6,29 +6,36 @@ import axios from "axios"
 
 const Login = () => {
 	const [password, setPassword] = useState('')
-	const [email, setEmail] = useState('')
+	const [formData, setFormData] = useState({ email: "", password: "" })
 	const [redirect, setRedirect] = useState(false)
 	const { setUserData } = useContext(UserContext)
 	// login
+	const formData = { email, password }
+	const onChange = (event) => {
+		const { name, value } = event.target;
+        setFormData({...formData, [name]: value })
+    }
 	const login = async (event) => {
 		event.preventDefault()
 		if (!email || !password) {
 			alert("All required fields must be filled.");
 	        return;
 		}
-		const formData = { email, password }
+
 
 		try {
 		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData, { withCredentials: true })
 			if (res.status === 200 || res.status === 201) {
-				setPassword("")
-				setEmail("")
+				setFormData({ email: "", password: "" });
 				navigate("/")
 	   			// toast.success("Successfully Logged in🥇")
 			}
 		} catch (error) {
 			console.log(error)
-			setPassword("")
+			setFormData((prevData) => ({
+                ...prevData,
+                password: ""
+            }));
 		}
 	}
 	return (
