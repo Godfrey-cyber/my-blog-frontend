@@ -16,6 +16,7 @@ const Login = () => {
 			alert("All required fields must be filled.");
 	        return;
 		}
+		const formData = { email, password }
 
 		try {
 		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData, { withCredentials: true })
