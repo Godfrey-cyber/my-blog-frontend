@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link, Navigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
 import { client } from "../assets/utilities"
+import axios from "axios"
 
 const Login = () => {
 	const [password, setPassword] = useState('')
@@ -35,7 +36,7 @@ const Login = () => {
 				<form action="" onSubmit={login} className="login_form">
 					<h4 className="text-gray-600 font-bold items-center my-4">Login</h4>
 					<input type="email" value={email} onChange={event => setEmail(event.target.value)} id="email" placeholder="Enter your email" className="login_input" />
-					<input type="password" value={password} onChange={event => setPassword(event.target.value)} id="password" placeholder="Enter your email" className="login_input" />
+					<input type="password" value={password} onChange={event => setPassword(event.target.value)} id="password" placeholder="Enter your password" className="login_input" />
 					<button type="submit" className="login_button">Login</button>
 					<div className="flex space-x-4 text-sm font-light text-gray-700">
 						<p className="">Don't have an account? <Link to="/register" className="text-sm font-normal cursor-pointer text-green-400">Register</Link></p>
