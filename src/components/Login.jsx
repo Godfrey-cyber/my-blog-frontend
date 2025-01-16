@@ -19,6 +19,7 @@ const Login = () => {
 		event.preventDefault()
 		if (!email || !password) {
 			alert("All required fields must be filled.");
+			// toast.success("Successfully Logged in🥇")
 	        return;
 		}
 		try {

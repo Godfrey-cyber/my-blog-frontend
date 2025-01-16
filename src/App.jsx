@@ -10,7 +10,6 @@ import IndexPage from "./Pages/IndexPage.jsx"
 import Layout from "./components/Layout.jsx"
 import CreatePost from "./components/CreatePost.jsx"
 import Page404 from "./components/Page404.jsx"
-import Sidebar from "./components/Sidebar.jsx"
 import { Route, Routes } from "react-router-dom"
 import { UserContextProvider } from "././UserContext.jsx"
 import PostPage from "./Pages/PostPage.jsx"
@@ -23,7 +22,6 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<IndexPage />} />
-                <Route index element={<Sidebar />} />
                 <Route path={'/login'} element={<Login />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/create'} element={<CreatePost />} />

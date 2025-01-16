@@ -9,6 +9,12 @@ const Header = () => {
 	const { setUserData, userData } = useContext(UserContext)
 	const [name, setName] = useState("")
 
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleSidebar = () => {
+	    setIsOpen(!isOpen);
+	};
+
 	useEffect(() => {
 		const getUserProfile = async () => {
 			try {

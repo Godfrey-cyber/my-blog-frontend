@@ -2,26 +2,40 @@ import React, { useState } from 'react'
 import { Link, Navigate } from "react-router-dom"
 
 const Register = () => {
-	const [username, setUsername] = useState('')
-	const [password, setPassword] = useState('')
+	const [formData, setFormData] = useState({ email: "", password: "", username: "" })
 	const [email, setEmail] = useState('')
 	const [redirect, setRedirect] = useState(false)
-	//register user
-	const register = async(event) => {
+	
+	const { username, password, email } = formData
+	const onChange = (event) => {
+		const { name, value } = event.target;
+        setFormData({...formData, [name]: value })
+    }
+    //register user
+	const register = async (event) => {
 		event.preventDefault()
-		const res = await fetch("https://my-blog-backend-t19h.onrender.com/users/register", {
-			method: "POST",
-			body: JSON.stringify({ username, password, email }),
-			headers: { 'Content-Type': 'application/json' },
-		})
-		if (res.status === 200) {
-			console.log("Registration successful")
-			console.log(res)
-			setRedirect(true)
-		} else {
-			console.log("Sorry something went wrong! Try again later please...")
+		if (!email || !password || !username) {
+			alert("All required fields must be filled.");
+			// toast.success("Successfully Logged in🥇")
+	        return;
+		}
+		try {
+		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/register", formData, { withCredentials: true })
+			if (res.status === 200 || res.status === 201) {
+				setFormData({ email: "", password: "", username: "" });
+				navigate("/")
+				console.log(res.data)
+	   			// toast.success("Successfully Logged in🥇")
+			}
+		} catch (error) {
+			console.log(error)
+			setFormData((prevData) => ({
+                ...prevData,
+                password: ""
+            }));
 		}
 	}
+
 	if (redirect) {
 		return <Navigate to={'/'} />
 	}
