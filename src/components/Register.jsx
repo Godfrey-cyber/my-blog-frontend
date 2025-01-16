@@ -23,7 +23,7 @@ const Register = () => {
 		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/register", formData, { withCredentials: true })
 			if (res.status === 200 || res.status === 201) {
 				setFormData({ email: "", password: "", username: "" });
-				navigate("/")
+				// navigate("/")
 				console.log(res.data)
 	   			// toast.success("Successfully Logged in🥇")
 			}
