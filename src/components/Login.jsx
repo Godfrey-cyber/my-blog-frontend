@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
+import { useSelector, useDispatch } from "react-redux"
+import { selectUser, loginFailure, loginSuccess, loginStart, registerStart } from "../Redux/Slices/userSlice.js"
 import { client } from "../assets/utilities"
 import axios from "axios"
 
@@ -17,6 +19,7 @@ const Login = () => {
 		const { name, value } = event.target;
         setFormData({...formData, [name]: value })
     }
+    const dispatch = useDispatch()
 	const login = async (event) => {
 		event.preventDefault()
 		if (!email || !password) {
@@ -24,9 +27,11 @@ const Login = () => {
 			// toast.success("Successfully Logged in🥇")
 	        return;
 		}
+		dispatch(loginStart())
 		try {
-		const res = await client.post("/users/login", formData)
+			const res = await client.post("/users/login", formData)
 			if (res.status === 200 || res.status === 201) {
+				dispatch(loginSuccess(res.data))
 				setFormData({ email: "", password: "" });
 				navigate("/")
 				console.log(res.data)
@@ -34,6 +39,7 @@ const Login = () => {
 			}
 		} catch (error) {
 			console.log(error)
+			dispatch(loginFailure(error?.response?.data?.msg || "Registration Failed"))
 			setFormData((prevData) => ({
                 ...prevData,
                 password: ""

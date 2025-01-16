@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { Link, Navigate } from "react-router-dom"
 import { client } from "../assets/utilities.js"
+import { useSelector, useDispatch } from "react-redux"
+import { selectUser, registerSuccess, registerStart, registerFailure, registerError } from "../Redux/Slices/userSlice.js"
 
 const Register = () => {
 	const [formData, setFormData] = useState({ email: "", password: "", username: "" })
 	const [email, setEmail] = useState('')
 	const [redirect, setRedirect] = useState(false)
-	
+	const user = useSelector(selectUser)
+	const dispatch = useDispatch()
+	console.log("register", user)
 	const { username, password, email } = formData
 	const onChange = (event) => {
 		const { name, value } = event.target;
@@ -20,16 +24,19 @@ const Register = () => {
 			// toast.success("Successfully Logged in🥇")
 	        return;
 		}
+		dispatch(registerStart())
 		try {
-		const res = await client.post("/users/register", formData, { withCredentials: true })
+			const res = await client.post("/users/register", formData, { withCredentials: true })
 			if (res.status === 200 || res.status === 201) {
+				dispatch(registerSuccess(res.data))
+				navigate("/login")
 				setFormData({ email: "", password: "", username: "" });
-				// navigate("/")
 				console.log(res.data)
 	   			// toast.success("Successfully Logged in🥇")
 			}
 		} catch (error) {
 			console.log(error)
+			dispatch(registerFailure(error?.response?.data?.msg || "Registration Failed"))
 			setFormData((prevData) => ({
                 ...prevData,
                 password: ""
