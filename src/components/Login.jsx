@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link, Navigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
 import { client } from "../assets/utilities"
 import axios from "axios"
@@ -8,6 +8,8 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [formData, setFormData] = useState({ email: "", password: "" })
 	const [redirect, setRedirect] = useState(false)
+
+	const navigate = useNavigate()
 	const { setUserData } = useContext(UserContext)
 	// login
 	const formData = { email, password }
@@ -26,8 +28,7 @@ const Login = () => {
 		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData)
 			if (res.status === 200 || res.status === 201) {
 				setFormData({ email: "", password: "" });
-				// navigate("/")
-				<Navigate to="/" />
+				navigate("/")
 				console.log(res.data)
 	   			// toast.success("Successfully Logged in🥇")
 			}
