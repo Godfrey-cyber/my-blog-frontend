@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, Navigate } from "react-router-dom"
+import { client } from "../assets/utilities.js"
 
 const Register = () => {
 	const [formData, setFormData] = useState({ email: "", password: "", username: "" })
@@ -20,7 +21,7 @@ const Register = () => {
 	        return;
 		}
 		try {
-		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/register", formData, { withCredentials: true })
+		const res = await client.post("/users/register", formData, { withCredentials: true })
 			if (res.status === 200 || res.status === 201) {
 				setFormData({ email: "", password: "", username: "" });
 				// navigate("/")
