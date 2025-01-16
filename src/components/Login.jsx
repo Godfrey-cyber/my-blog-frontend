@@ -23,7 +23,7 @@ const Login = () => {
 	        return;
 		}
 		try {
-		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData, { withCredentials: true })
+		const res = await axios.post("https://my-blog-backend-t19h.onrender.com/users/login", formData)
 			if (res.status === 200 || res.status === 201) {
 				setFormData({ email: "", password: "" });
 				// navigate("/")
