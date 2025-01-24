@@ -6,7 +6,6 @@ import { selectUser, registerSuccess, registerStart, registerFailure, registerEr
 
 const Register = () => {
 	const [formData, setFormData] = useState({ email: "", password: "", username: "" })
-	// const [email, setEmail] = useState('')
 	const [redirect, setRedirect] = useState(false)
 	const user = useSelector(selectUser)
 	const dispatch = useDispatch()
