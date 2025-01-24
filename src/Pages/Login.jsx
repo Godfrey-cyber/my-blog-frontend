@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectUser, loginFailure, loginSuccess, loginStart, registerStart } from "../Redux/Slices/userSlice.js"
 import { client } from "../assets/utilities.js"
 import axios from "axios"
+// import 
 
 const Login = () => {
 	// const [password, setPassword] = useState('')
@@ -62,9 +63,10 @@ const Login = () => {
 				</div>
 			</div>
 			<form onSubmit={login} className="col-span-4 flex flex-col justify-center items-center space-y-4 px-5">
+				<img className="h-8 w-auto" src="https://s.yimg.com/wm/assets/images/ns/techcrunch-logov0.0.2.png" alt="" />
 				<h4 className="text-gray-700 text-2xl font-bold items-center my-4">Login</h4>
-				<input type="email" value={email} onChange={event => setEmail(event.target.value)} id="email" placeholder="Enter your email" className="login_input" />
-				<input type="password" value={password} onChange={event => setPassword(event.target.value)} id="password" placeholder="Enter your password" className="login_input" />
+				<input type="email" value={email} onChange={event => setEmail(event.target.value)} id="email" placeholder="Email" className="login_input" />
+				<input type="password" value={password} onChange={event => setPassword(event.target.value)} id="password" placeholder="Password" className="login_input" />
 				<button type="submit" className="login_button">Login</button>
 				<div className="flex space-x-4 text-sm font-light text-gray-700">
 					<p className="">Don't have an account? <Link to="/register" className="text-sm font-normal cursor-pointer text-green-400">Register</Link></p>

@@ -7,6 +7,7 @@ import SideBarRight from "../components/SideBarRight"
 import MoreFeature from "../components/MoreFeature"
 import Featured from "../components/Featured"
 import { format } from "date-fns"
+import axios from "axios"
 
 const PostPage = () => {
 	const [postData, setPostData] = useState([])
@@ -19,6 +20,26 @@ const PostPage = () => {
 			response.json().then(post => setPostData(post))
 		})
 	}, [id])
+
+	const login = async (event) => {
+		try {
+			const res = await client.get("/posts")
+			if (res.status === 200) {
+				// dispatch(loginSuccess(res.data))
+				console.log(res.data)
+	   			// toast.success("Successfully Logged in🥇")
+			}
+		} catch (error) {
+			console.log(error)
+			// dispatch(loginFailure(error?.response?.data?.msg || "Registration Failed"))
+			console.log(error)
+			setFormData((prevData) => ({
+	            ...prevData,
+	            password: ""
+	        }));
+		}
+	}
+
 	const { _id, title, photo, summary, content, createdAt, author, catName } = postData
 	if (!postData) return ""
 	return (
