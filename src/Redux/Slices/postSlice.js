@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const appointmentSlice = createSlice({
+const postSlice = createSlice({
 	name: "post",
 	initialState: {
 		posts: [],

@@ -7,14 +7,14 @@ import { client } from "../assets/utilities"
 import axios from "axios"
 
 const Login = () => {
-	const [password, setPassword] = useState('')
+	// const [password, setPassword] = useState('')
 	const [formData, setFormData] = useState({ email: "", password: "" })
 	const [redirect, setRedirect] = useState(false)
 
 	const navigate = useNavigate()
 	const { setUserData } = useContext(UserContext)
 	// login
-	const formData = { email, password }
+	const { email, password } = formData
 	const onChange = (event) => {
 		const { name, value } = event.target;
         setFormData({...formData, [name]: value })

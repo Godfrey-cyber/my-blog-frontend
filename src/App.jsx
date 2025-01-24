@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Header from "./components/Header.jsx"
 import Post from "./components/Post.jsx"
-import Login from "./components/Login.jsx"
+import Login from "./Pages/Login.jsx"
 import Register from "./components/Register.jsx"
 import IndexPage from "./Pages/IndexPage.jsx"
 import Layout from "./components/Layout.jsx"
@@ -22,7 +22,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<IndexPage />} />
-                <Route path={'/login'} element={<Login />} />
+                <Route path={'/login_user'} element={<Login />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/create'} element={<CreatePost />} />
                 <Route path={'/post/:id'} element={<PostPage />} />

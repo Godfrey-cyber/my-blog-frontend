@@ -40,12 +40,16 @@ const Header = () => {
 		})
 		setUserData(null)
 	}
+	
 
 	const username = userData?.data?.username
 	return (
 		<header className="header">
 		<span className="flex items-center space-x-1">
-			<Link to="/" className="header_logo">MyBlog.</Link>
+			{/*<Link to="/" className="header_logo">MyBlog.</Link>*/}
+			<Link to="/">
+				<img className="h-8 w-auto" src="https://s.yimg.com/wm/assets/images/ns/techcrunch-logov0.0.2.png" alt="" />
+			</Link>
 			<Sidebar />
 		</span>
 			<nav className="header_username">
@@ -58,7 +62,7 @@ const Header = () => {
 			{!username && (
 				<>
 					<Link to="/register" className="header_links">Register</Link>
-					<Link to="/login" className="header_links">Login</Link>
+					<Link to="/login_user" className="header_links">Login</Link>
 				</>
 				)}
 			</nav>

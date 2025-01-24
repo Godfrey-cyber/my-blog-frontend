@@ -3,11 +3,11 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import { UserContext } from "../UserContext"
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, loginFailure, loginSuccess, loginStart, registerStart } from "../Redux/Slices/userSlice.js"
-import { client } from "../Pages/Login.jsx"
+import { client } from "../assets/utilities.js"
 import axios from "axios"
 
 const Login = () => {
-	const [password, setPassword] = useState('')
+	// const [password, setPassword] = useState('')
 	const [formData, setFormData] = useState({ email: "", password: "" })
 	const [redirect, setRedirect] = useState(false)
 
@@ -46,10 +46,14 @@ const Login = () => {
             }));
 		}
 	}
-	return (
-		<section className="h-screen w-screen">
-			<form action="" onSubmit={login} className="login_form">
-				<h4 className="text-gray-600 font-bold items-center my-4">Login</h4>
+	return ( // min-h-[calc(100vh - 60px)]
+		<section className="grid grid-cols-12 h-screen overflow-y-hidden w-full bg-white">
+			<div className="col-span-8 flex flex-col space-y-4 bg-green-500">
+				<p className="text-green">Hello</p>
+			</div>
+			<form onSubmit={login} className="col-span-4 flex flex-col justify-center items-center space-y-4 px-5">
+				<h4 className="text-gray-700 text-2xl font-bold items-center my-4">Login</h4>
+				<label htmlFor="email">Email</label>
 				<input type="email" value={email} onChange={event => setEmail(event.target.value)} id="email" placeholder="Enter your email" className="login_input" />
 				<input type="password" value={password} onChange={event => setPassword(event.target.value)} id="password" placeholder="Enter your password" className="login_input" />
 				<button type="submit" className="login_button">Login</button>

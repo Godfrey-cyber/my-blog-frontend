@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import postSlice from '../slices/postSlice.js';
-import userSlice from '../slices/userSlice.js';
+import postSlice from '../Slices/postSlice.js';
+import userSlice from '../Slices/userSlice.js';
 // import prescriptionSlice from '../slices/prescriptionSlice.js';
 
 
 const rootReducer = combineReducers({
-  // cart: cartSlice,
+    // cart: cartSlice,
     post: postSlice,
     user: userSlice,
     // prescription: prescriptionSlice,
