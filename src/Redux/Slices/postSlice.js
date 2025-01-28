@@ -38,24 +38,24 @@ const postSlice = createSlice({
 			state.isFetching = true
 			state.error = false
 			state.errMsg = null
-			// state.post = null
+			state.post = null
 		},
 		getPostsSuccess: (state, action) => {
 			state.isFetching = false
 			state.error = false
 			state.errMsg = null
-			state.post = action.payload;
+			state.posts = action.payload;
 		},
-		getPostFailure: (state, action) => {
+		getPostsFailure: (state, action) => {
 			state.isFetching = false
 			state.error = true
 			state.errMsg = action.payload
-			// state.post = null
+			state.post = null
 		}
 	}
 })
 
-export const { makePostStart, makePostFailure, makePostSuccess, getPostsStart, getPostsSuccess, getPostsFailure } = postSlice.actions
+export const { makePostsStart, makePostsFailure, makePostsSuccess, getPostsStart, getPostsSuccess, getPostsFailure } = postSlice.actions
 export const selectPost = (state => state.post?.posts)
 export const postError = (state => state.post?.errMsg)
 export default postSlice.reducer

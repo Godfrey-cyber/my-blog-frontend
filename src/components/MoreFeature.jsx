@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom"
 import { format } from "date-fns"
+import { useSelector, useDispatch } from "react-redux"
+import { client } from "../assets/utilities.js"
+import { getPostsFailure, getPostsSuccess, getPostsStart } from "../Redux/Slices/postSlice.js"
 
 const MoreFeatured = () => {
 	const [featuredPosts, setFeaturedPosts] = useState([])
+	const dispatch = useDispatch()
 	useEffect(() => {
 		const getMoreFeatured = async () => {
 			try {
+				dispatch(getPostsStart())
 				const response = await client.get("/posts/allposts")
 				setFeaturedPosts(response?.data?.data)
+				dispatch(getPostsSuccess(response?.data?.data))
 				// console.log(response)
 			} catch (error) {
 				// return res.status(401).json(error)
 				console.log(error)
+				dispatch(getPostsFailure(error.message))
 			}
 		}
 		getMoreFeatured()

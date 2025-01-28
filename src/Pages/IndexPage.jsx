@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Post from "../components/Post"
+import { useSelector, useDispatch } from "react-redux"
+import { client } from "../assets/utilities.js"
+import { getPostsFailure, getPostsSuccess, getPostsStart, selectPost } from "../Redux/Slices/postSlice.js"
 
 const IndexPage = () => {
-	const [posts, setPosts] = useState([])
+	// const [posts, setPosts] = useState([])
+	const dispatch = useDispatch()
+	const posts = useSelector(selectPost)
+	console.log(posts)
 	useEffect(() => {
-		fetch("https://my-blog-backend-t19h.onrender.com/posts/allposts").then(res => {
-			res.json().then(data => {
-				setPosts(data)
-			})
-		})
+		const getAllPosts = async () => {
+			dispatch(getPostsStart())
+			try {
+				const res = await client.get("/posts/allposts")
+				if(res.status === 200) {
+					dispatch(getPostsSuccess(res?.data))
+					console.log(res.data)
+				}
+			} catch (error) {
+				if(error)
+				dispatch(getPostsFailure(error.message))
+				console.log(error)
+			}
+		}
+		getAllPosts()
 	}, [])
 	return (
 		<>

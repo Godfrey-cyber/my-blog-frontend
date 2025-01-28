@@ -19,7 +19,7 @@ export const formats = [
 
 export const client = axios.create({
 	baseURL: "https://my-blog-backend-t19h.onrender.com/api/v1",
-	// withCredentials: true
+	withCredentials: true
 });
 
 export const getCategories = async () => {

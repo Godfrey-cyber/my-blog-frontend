@@ -1,26 +1,31 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { client } from "../assets/utilities.js"
+import { selectPost, getPostsStart, getPostsSuccess, getPostsFailure } from "../Redux/Slices/postSlice.js"
 
 const Featured = () => {
-	const [featuredPosts, setFeaturedPosts] = useState([])
 	const { id } = useParams()
+	const dispatch = useDispatch()
+	const posts = useSelector(selectPost)
+	console.log(posts)
 	useEffect(() => {
 		const getFeatured = async () => {
 			try {
-				const response = await client.get("/posts/allposts")
-				setFeaturedPosts(response?.data?.data)
-				// console.log(response)
+				dispatch(getPostsStart())
+				const res = await client.get("/posts/allposts")
+				dispatch(getPostsSuccess(res?.data))
 			} catch (error) {
-				// return res.status(401).json(error)
 				console.log(error)
+				dispatch(getPostsFailure(error.message))
 			}
 		}
 		getFeatured()
-	}, [])
+	}, [posts])
 	return (
 		<section className="grid grid-cols-12 gap-y-3 md:gap-y-0 md:gap-x-4 w-full my-4 md:my-0">
 			<div className="lg:col-span-8 col-span-12 flex flex-col space-y-2 w-full">
-				{featuredPosts?.slice(1,2).map(post => (
+				{posts?.slice(1,2).map(post => (
 					<div className="flex flex-col space-y-3" key={post._id}>
 						<span className="flex flex-col space-y-3">
 							<h3 className="text-green-600 text-xs">{post.catName}</h3>
@@ -34,8 +39,8 @@ const Featured = () => {
 				))}
 			</div>
 			<div className="col-span-12 lg:col-span-4 flex flex-col space-y-3 lg:space-y-1">
-				{featuredPosts.slice(3, 7).map(post => (
-					<Link to={`/post/${post._id}`}>
+				{posts?.slice(3, 7).map(post => (
+					<Link to={`/post/${post._id}`} key={post?._id}>
 						<span className="flex flex-col space-y-2 cursor-pointer hover:bg-gray-100 transition delay-200 p-1 rounded-sm">
 							<h3 className="text-green-600 text-xs">{post.catName}</h3>
 							<p className="text-black text-lg font-bold leading-5">{post.title.length > 61 ? post.title.substring(0, 61) : post.title}...</p>

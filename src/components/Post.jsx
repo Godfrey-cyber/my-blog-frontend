@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 const Post = ({ _id, title, photo, summary, content, createdAt, author, catName }) => {
 	return (
-		<div className="grid grid-cols-12 px-5 lg:px-20 md:px-10 my-6 gap-4 group">
-	{/*img & title*/}
+		<div key={_id} className="grid grid-cols-12 px-5 lg:px-20 md:px-10 my-6 gap-4 group">
+			{/*img & title*/}
 			<div className="grid grid-cols-12 flex flex-col gap-x-3">
 
 			</div>
@@ -14,16 +14,16 @@ const Post = ({ _id, title, photo, summary, content, createdAt, author, catName 
 					<img className="post_img" src={`https://my-blog-backend-t19h.onrender.com/${photo}`} alt={`http://localhost:5000/${photo}`} />
 				</Link>
 			</div>
-		{/*title*/}
+			{/*title*/}
 			<div className="flex flex-col space-y-1 lg:col-span-3 col-span-12 cursor-pointer">
 				<p className="text-xs font-medium text-green-600">{catName}</p>
 				<Link to={`/post/${_id}`}>
 					<h2 className="w-fulll text-xl font-bold text-gray-800 group-hover:text-green-600 transition delay-300">{title}</h2>
 				</Link>
 			</div>
-		{/*summary*/}
+			{/*summary*/}
 			<div className="flex flex-col space-y-3 col-span-12 lg:col-span-4 w-full">
-				<p className="text-sm font-normal text-gray-700">{summary.substring(0, 200)}...</p>
+				<p className="text-sm font-normal text-gray-700">{summary?.substring(0, 200)}...</p>
 				<div className="text-sm font-normal text-gray-700">
 					<span className="flex space-x-4">
 						<p className="text-xs text-gray-400 text-green-600 font-bold">{author?.username}</p>
