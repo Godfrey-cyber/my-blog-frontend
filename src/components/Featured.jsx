@@ -5,12 +5,17 @@ const Featured = () => {
 	const [featuredPosts, setFeaturedPosts] = useState([])
 	const { id } = useParams()
 	useEffect(() => {
-		fetch("https://my-blog-backend-t19h.onrender.com/posts/allposts").then(res => {
-			res.json().then(data => {
-				setFeaturedPosts(data)
-				// console.log(featuredPosts)
-			})
-		})
+		const getFeatured = async () => {
+			try {
+				const response = await client.get("/posts/allposts")
+				setFeaturedPosts(response?.data?.data)
+				// console.log(response)
+			} catch (error) {
+				// return res.status(401).json(error)
+				console.log(error)
+			}
+		}
+		getFeatured()
 	}, [])
 	return (
 		<section className="grid grid-cols-12 gap-y-3 md:gap-y-0 md:gap-x-4 w-full my-4 md:my-0">

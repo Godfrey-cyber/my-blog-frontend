@@ -5,12 +5,17 @@ import { format } from "date-fns"
 const MoreFeatured = () => {
 	const [featuredPosts, setFeaturedPosts] = useState([])
 	useEffect(() => {
-		fetch("https://my-blog-backend-t19h.onrender.com/posts/allposts").then(res => {
-			res.json().then(data => {
-				setFeaturedPosts(data)
-				console.log(featuredPosts)
-			})
-		})
+		const getMoreFeatured = async () => {
+			try {
+				const response = await client.get("/posts/allposts")
+				setFeaturedPosts(response?.data?.data)
+				// console.log(response)
+			} catch (error) {
+				// return res.status(401).json(error)
+				console.log(error)
+			}
+		}
+		getMoreFeatured()
 	}, [])
 	return (
 		<section className="flex flex-col space-y-3 w-full">

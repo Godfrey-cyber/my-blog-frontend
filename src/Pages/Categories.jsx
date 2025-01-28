@@ -10,34 +10,41 @@ const Categories = () => {
 	const [posts, setPosts] = useState([])
 	const { id } = useParams()
 
-	// useEffect(() => {
-		// const getCategory = async () => {
-		// 	try {
-		// 		const response = await client.get(`/categories/getCategory/${id}`)
-		// 		setCategory(response.data.data)
-		// 		console.log(response)
-		// 	} catch (error) {
-		// 		// return res.status(401).json(error)
-		// 		console.log(error)
-		// 	}
-		// }
-		useEffect(() => {
-			fetch(`https://my-blog-backend-t19h.onrender.com/categories/getCategory/${id}`).then(response => {
-				response.json().then(cat => setCategory(cat.data))
-			}).catch(err => console.log(err))
-			console.log(category)
-		}, [id])
-
-		useEffect(() => {
-			fetch(`https://my-blog-backend-t19h.onrender.com/posts/getByCategory/${id}`).then(res => {
-				res.json().then(data => {
-					setPosts(data.data)
-					console.log(data.data)
-				})
+	useEffect(() => {
+		const getCategory = async () => {
+			try {
+				const response = await client.get(`/categories/getCategory/${id}`)
+				setCategory(response.data.data)
+				console.log(response)
+			} catch (error) {
+				// return res.status(401).json(error)
+				console.log(error)
+			}
+		}
+		getCategory()
+	}, [])
+	
+	useEffect(() => {
+		fetch(`https://my-blog-backend-t19h.onrender.com/posts/getByCategory/${id}`).then(res => {
+			res.json().then(data => {
+				setPosts(data.data)
+				console.log(data.data)
 			})
-		}, [id])
-		// getCategory()
-	// }, [])
+		})
+	}, [id])
+	useEffect(() => {
+		const getByCategory = async () => {
+			try {
+				const response = await client.get(`/posts/getCategory/${id}`)
+				setCategory(response.data.data)
+				console.log(response)
+			} catch (error) {
+				// return res.status(401).json(error)
+				console.log(error)
+			}
+		}
+		getByCategory()
+	}, [])
 	return (
 		<section className="grid grid-cols-12 px-5 md:px-10 lg:px-20 my-4 w-full bg-white min-h-[calc(100vh - 60px)]">
 			<div className="col-span-2 flex flex-col">

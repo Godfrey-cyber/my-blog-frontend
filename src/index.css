@@ -4,7 +4,7 @@
 
 @layer components {
 	.header {
-		@apply  flex px-5 lg:px-20 bg-white justify-between py-4 h-[65px] items-center w-full sticky top-0 border border-gray-200
+		@apply flex px-5 lg:px-20 bg-white justify-between py-4 h-[65px] items-center w-full sticky top-0 border border-gray-200
 	}
 	.header_logo {
 		@apply text-3xl font-bold text-black cursor-pointer hover:text-emerald-400 transition delay-200
@@ -13,7 +13,7 @@
 		@apply flex items-center justify-between text-gray-800 text-sm space-x-4
 	}
 	.header_links {
-		@apply cursor-pointer hover:text-emerald-400 transition delay-200
+		@apply cursor-pointer text-xs font-bold text-white hover:text-emerald-400 hover:font-semibold transition delay-200
 	}
 
 	/************************EDIT SECTION*********************/
