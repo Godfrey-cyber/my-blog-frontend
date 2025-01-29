@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from "../UserContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { client } from "../assets/utilities.js"
 import Sidebar from "./SideBar.jsx"
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -15,11 +15,10 @@ const Header = () => {
 	const [name, setName] = useState("")
 
 	const [isOpen, setIsOpen] = useState(false);
-	const user = useSelector(selectUser)
+	const user = useSelector(selectUser).user
 	const posts = useSelector(selectPost)
-	// console.log("users", user)
-	// console.log("posts", posts)
-
+	const navigate = useNavigate()
+	console.log(user)
 	const toggleSidebar = () => {
 	    setIsOpen(!isOpen);
 	};
@@ -44,10 +43,10 @@ const Header = () => {
 				<Link to="/login_user" className="header_links">Newsletters</Link>
 			</nav>
 			<div className="flex items-center space-x-5">
-				<span className="flex items-center space-x-1 group cursor-pointer p-1 hover:border border-gray-100 rounded-2xl">
+				{user && <span onClick={() => navigate("/login_user")} className="flex items-center space-x-1 group cursor-pointer p-1 hover:border border-gray-100 rounded-2xl">
 					<FaRegCircleUser className="text-sm h-6 w-6 text-white transition delay-200 group-hover:text-emerald-400" />
 					<p className="md:flex hidden text-sm text-white font-normal group-hover:text-emerald-400">Sign In</p>
-				</span>
+				</span>}
 				<span className="rounded p-1 hover:border border-gray-100 rounded-full transition-all delay-200">
 					<MdOutlineSearch className="text-sm h-6 w-6 cursor-pointer text-white hover:text-emerald-400 transition delay-200" />
 				</span>

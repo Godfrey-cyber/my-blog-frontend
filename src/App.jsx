@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -15,8 +15,32 @@ import { UserContextProvider } from "././UserContext.jsx"
 import PostPage from "./Pages/PostPage.jsx"
 import EditPost from "./Pages/EditPost.jsx"
 import Categories from "./Pages/Categories.jsx"
+import { useSelector, useDispatch } from "react-redux"
+import { client } from "./assets/utilities.js"
+import { selectPost, getPostsFailure, getPostsSuccess, getPostsStart } from "./Redux/Slices/postSlice.js"
+import { selectUser } from "./Redux/Slices/userSlice.js"
 
 function App() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        const getAllPosts = async () => {
+            dispatch(getPostsStart())
+            try {
+                const res = await client.get("/posts/allposts")
+                if(res.status === 200) {
+                    dispatch(getPostsSuccess(res?.data))
+                    console.log(res.data)
+                }
+            } catch (error) {
+                if(error)
+                dispatch(getPostsFailure(error.message))
+                console.log(error)
+            }
+        }
+        getAllPosts()
+    }, [])
+    const user = useSelector(selectUser).user
+    console.log(user)
   return ( 
     <UserContextProvider>
         <Routes>
@@ -24,9 +48,9 @@ function App() {
                 <Route index element={<IndexPage />} />
                 <Route path={'/login_user'} element={<Login />} />
                 <Route path={'/register'} element={<Register />} />
-                <Route path={'/create'} element={<CreatePost />} />
+                <Route path={'/create'} element={!user ? <Login/> : <CreatePost />} />
                 <Route path={'/post/:id'} element={<PostPage />} />
-                <Route path={'/edit/:id'} element={<EditPost />} />
+                <Route path={'/edit/:id'} element={!user ? <Login/> : <EditPost />} />
                 <Route path={'/categories/:id'} element={<Categories />} />
                 <Route path="*" element={<Page404 />} />
             </Route>

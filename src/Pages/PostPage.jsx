@@ -16,45 +16,25 @@ import { selectPost, getPostsStart, getPostsSuccess, getPostsFailure } from "../
 const PostPage = () => {
 	const { id } = useParams()
 	const location = useParams()
+	const [post, setPost] = useState([])
 
 	const dispatch = useDispatch()
-	const post = useSelector(selectPost)
+	// const post = useSelector(selectPost)
 	console.log("post", post)
 	useEffect(() => {
 		const getFeatured = async () => {
-			dispatch(getPostsStart())
 			try {
 				const res = await client.get(`/posts/${id}`)
 				if(res.status === 200) {
-					dispatch(getPostsSuccess(res?.data))
+					setPost(res?.data)
 					console.log(res.data)
 				}
 			} catch (error) {
 				console.log(error)
-				dispatch(getPostsFailure(error.message))
 			}
 		}
 		getFeatured()
-	}, [])
-
-	const login = async (event) => {
-		try {
-			const res = await client.get("/posts")
-			if (res.status === 200) {
-				dispatch(loginSuccess(res.data))
-				console.log(res.data)
-	   			// toast.success("Successfully Logged in🥇")
-			}
-		} catch (error) {
-			console.log(error)
-			dispatch(loginFailure(error || "Registration Failed"))
-			console.log(error)
-			setFormData((prevData) => ({
-	            ...prevData,
-	            password: ""
-	        }));
-		}
-	}
+	}, [id])
 
 	// const { _id, title, photo, summary, content, createdAt, author, catName } = post
 	if (!post) return <LoadingPage />

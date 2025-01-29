@@ -18,7 +18,7 @@ export const formats = [
   ]
 
 export const client = axios.create({
-	baseURL: "https://my-blog-backend-t19h.onrender.com/api/v1",
+	baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}/api/v1`,
 	withCredentials: true
 });
 

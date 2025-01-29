@@ -9,19 +9,6 @@ const Featured = () => {
 	const dispatch = useDispatch()
 	const posts = useSelector(selectPost)
 	console.log(posts)
-	useEffect(() => {
-		const getFeatured = async () => {
-			try {
-				dispatch(getPostsStart())
-				const res = await client.get("/posts/allposts")
-				dispatch(getPostsSuccess(res?.data))
-			} catch (error) {
-				console.log(error)
-				dispatch(getPostsFailure(error.message))
-			}
-		}
-		getFeatured()
-	}, [posts])
 	return (
 		<section className="grid grid-cols-12 gap-y-3 md:gap-y-0 md:gap-x-4 w-full my-4 md:my-0">
 			<div className="lg:col-span-8 col-span-12 flex flex-col space-y-2 w-full">

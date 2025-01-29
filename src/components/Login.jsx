@@ -30,7 +30,7 @@ const Login = () => {
 		dispatch(loginStart())
 		try {
 			const res = await client.post("/users/login", formData)
-			if (res.status === 200 || res.status === 201) {
+			if (res.status === 200) {
 				dispatch(loginSuccess(res.data))
 				setFormData({ email: "", password: "" });
 				navigate("/")
