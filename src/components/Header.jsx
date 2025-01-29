@@ -15,10 +15,13 @@ const Header = () => {
 	const [name, setName] = useState("")
 
 	const [isOpen, setIsOpen] = useState(false);
-	const user = useSelector(selectUser).user
+	const user = useSelector(selectUser)
 	const posts = useSelector(selectPost)
 	const navigate = useNavigate()
 	console.log(user)
+	console.log(!user)
+	console.log(user !== true)
+	console.log(user && 'true')
 	const toggleSidebar = () => {
 	    setIsOpen(!isOpen);
 	};
@@ -43,10 +46,10 @@ const Header = () => {
 				<Link to="/login_user" className="header_links">Newsletters</Link>
 			</nav>
 			<div className="flex items-center space-x-5">
-				{user && <span onClick={() => navigate("/login_user")} className="flex items-center space-x-1 group cursor-pointer p-1 hover:border border-gray-100 rounded-2xl">
+				{!user && (<span onClick={() => navigate("/login_user")} className="flex items-center space-x-1 group cursor-pointer p-1 hover:border border-gray-100 rounded-2xl">
 					<FaRegCircleUser className="text-sm h-6 w-6 text-white transition delay-200 group-hover:text-emerald-400" />
 					<p className="md:flex hidden text-sm text-white font-normal group-hover:text-emerald-400">Sign In</p>
-				</span>}
+				</span>)}
 				<span className="rounded p-1 hover:border border-gray-100 rounded-full transition-all delay-200">
 					<MdOutlineSearch className="text-sm h-6 w-6 cursor-pointer text-white hover:text-emerald-400 transition delay-200" />
 				</span>

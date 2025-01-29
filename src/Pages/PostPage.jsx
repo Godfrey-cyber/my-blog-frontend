@@ -21,6 +21,7 @@ const PostPage = () => {
 	const dispatch = useDispatch()
 	// const post = useSelector(selectPost)
 	console.log("post", post)
+	console.log("post", post && 'yes')
 	useEffect(() => {
 		const getFeatured = async () => {
 			try {

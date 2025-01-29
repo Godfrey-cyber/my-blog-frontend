@@ -39,8 +39,8 @@ function App() {
         }
         getAllPosts()
     }, [])
-    const user = useSelector(selectUser).user
-    console.log(user)
+    const user = useSelector(selectUser)
+    console.log(user === true)
   return ( 
     <UserContextProvider>
         <Routes>
