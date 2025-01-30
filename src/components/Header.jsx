@@ -34,18 +34,18 @@ const Header = () => {
 				</Link>
 			</span>
 			<nav className="lg:flex items-center space-x-3 hidden ">
-				<Link to="/latest" className="header_links">Latest</Link>
-				<Link to="/register" className="header_links">Startups</Link>
-				<Link to="/login_user" className="header_links">Venture</Link>
+				<Link to="#" className="header_links">Latest</Link>
+				<Link to="#" className="header_links">Startups</Link>
+				<Link to="#" className="header_links">Venture</Link>
 				<Link to="#" className="header_links">Apple</Link>
-				<Link to="/register" className="header_links">Security</Link>
-				<Link to="/login_user" className="header_links">AI</Link>
+				<Link to="#" className="header_links">Security</Link>
+				<Link to="#" className="header_links">AI</Link>
 				<Link to="#" className="header_links">Apps</Link>
-				<Link to="/register" className="header_links">Events</Link>
-				<Link to="/login_user" className="header_links">Podcasts</Link>
-				<Link to="/login_user" className="header_links">Newsletters</Link>
+				<Link to="#" className="header_links">Events</Link>
+				<Link to="#" className="header_links">Podcasts</Link>
+				<Link to="#" className="header_links">Newsletters</Link>
 			</nav>
-			<div className="flex items-center space-x-5">
+			<div className="flex items-center space-x-2 md:space-x-3 lg:space-x-5">
 				{!user && (<span onClick={() => navigate("/login_user")} className="flex items-center space-x-1 group cursor-pointer p-1 hover:border border-gray-100 rounded-2xl">
 					<FaRegCircleUser className="text-sm h-6 w-6 text-white transition delay-200 group-hover:text-emerald-400" />
 					<p className="md:flex hidden text-sm text-white font-normal group-hover:text-emerald-400">Sign In</p>

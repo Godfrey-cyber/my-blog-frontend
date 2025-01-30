@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import { Link, Navigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { modules, formats, client, getCategories } from "../assets/utilities"
+import { makePostsStart, makePostsFailure, makePostsSuccess } from "../Redux/Slices/postSlice.js"
 
 const CreatePost = () => {
 	const [redirect, setRedirect] = useState(false)
@@ -13,7 +15,7 @@ const CreatePost = () => {
 	const [category, setCategory] = useState('')
 	const [catId, setCatId] = useState('')
 	const [catName, setcatName] = useState('')
-
+	const dispatch = useDispatch()
 	useEffect(() => {
 		const getCategories = async () => {
 			try {
@@ -49,58 +51,24 @@ const CreatePost = () => {
 		userData.set("catName", catName)
 		// userData.set("category", category)
 		userData.set("photo", photo[0])
-		// try {
-		// 	const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
-		// 		method: "POST",
-		// 		body: userData,
-		// 		credentials: "include",
-		// 	})
-		// 	if (response.ok) {
-		// 		setRedirect(true)
-		// 	}
-		// } catch (error) {
-		// 	if (error || response.status === "400") {
-		// 		return console.log("Something went wrong")
-		// 	} else {
-		// 		console.log(error)
-		// 	}
-		// }
+		
+		dispatch(makePostsStart())
 		try {
-			const response = await fetch("https://my-blog-backend-t19h.onrender.com/posts/createpost", {
-				method: "POST",
-				body: userData,
-				headers: { 'Content-Type': 'application/json' },
-				credentials: "include",
-			})
-			if (response.ok) {
-				setRedirect(true)
-			}
+			const res = await client.post("/posts/createpost", userData)
+			if (res.status === 201) {
+	    		dispatch(makePostsSuccess(res.data))
+	    		navigate("/")
+	    		console.log(res.data);
+	    		// toast.success("Successfully Logged in🥇");
+	    	}
 		} catch (error) {
-			if (error) {
-				console.log(error)
-			} 
+			dispatch(makePostsFailure(error?.response?.data?.msg || "Registration Failed"))
+			// setFormData((prevData) => ({
+            //     ...prevData,
+            //     password: ""
+            // }));
+            console.log(error)
 		}
-		
-
-		
-
-		// try {
-		// 	const response = await client.post("/posts/createpost", {
-		// 		body: userData,
-		// 		withCredentials: true
-		// 	})
-		// 	if (response.ok) {
-		// 		setRedirect(true)
-		// 		console.log('successfully created')
-		// 	}
-		// }catch (error) {
-		// 	if (error || response.status === "400") {
-		// 		return console.log("Something went wrong")
-		// 	} else {
-		// 		console.error(error?.stack);
-		// 	}
-		// } 
-
 	}
 	if (redirect) {
 		return <Navigate to={'/'}/>

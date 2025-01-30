@@ -12,21 +12,21 @@ const postSlice = createSlice({
 	    uploadSuccess: false,
 	},
 	reducers: {
-		makePostStart: (state) => {
+		makePostsStart: (state) => {
 			state.uploadLoading = true
 			state.error = false
 			state.uploadError = null
 			state.uploadSuccess = false
 			// state.post = []
 		},
-		makePostSuccess: (state, action) => {
+		makePostsSuccess: (state, action) => {
 			state.uploadLoading = false
 			state.error = false
 			state.post.push(action.payload);
 			state.uploadSuccess = true
 			state.uploadError = null
 		},
-		makePostFailure: (state, action) => {
+		makePostsFailure: (state, action) => {
 			state.uploadLoading = false
 			state.error = true
 			state.uploadError = action.payload
